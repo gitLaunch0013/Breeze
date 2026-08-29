@@ -8,6 +8,9 @@ import 'package:zephyr/platform/desktop/native_window.dart';
 class CustomTitleBar extends StatefulWidget {
   const CustomTitleBar({super.key});
 
+  /// 标题栏高度（真实像素，不随界面缩放变化）。
+  static const double height = 40;
+
   @override
   State<CustomTitleBar> createState() => _CustomTitleBarState();
 }
@@ -75,7 +78,7 @@ class _CustomTitleBarState extends State<CustomTitleBar> with WindowListener {
     final isMacOS = Platform.isMacOS; // 检测是否为 macOS
 
     return Container(
-      height: 40,
+      height: CustomTitleBar.height,
       color: colorScheme.surface,
       child: Row(
         children: [

@@ -31,6 +31,7 @@ class AppearanceSettingPage extends StatelessWidget {
           ),
           _languageTile(context, state, cubit),
           _systemTheme(state, cubit),
+          _uiScale(state, cubit),
           _dynamicColor(state, cubit),
           if (!state.dynamicColor) changeThemeColor(context),
           _comicReadTopContainer(state, cubit),
@@ -99,6 +100,31 @@ class AppearanceSettingPage extends StatelessWidget {
         items: themeItems,
         onChanged: (ThemeMode value) {
           cubit.updateState((current) => current.copyWith(themeMode: value));
+        },
+      ),
+    );
+  }
+
+  Widget _uiScale(GlobalSettingState state, GlobalSettingCubit cubit) {
+    const scaleItems = <double, String>{
+      1.0: '100%',
+      1.25: '125%',
+      1.5: '150%',
+      1.75: '175%',
+      2.0: '200%',
+    };
+
+    return ListTile(
+      leading: const Icon(Icons.aspect_ratio),
+      title: Text(t.settings.uiScale),
+      subtitle: Text(t.settings.uiScaleSubtitle),
+      trailing: FluentDropdown<double>(
+        value: state.uiScale,
+        displayValue:
+            scaleItems[state.uiScale] ?? '${(state.uiScale * 100).round()}%',
+        items: scaleItems,
+        onChanged: (double value) {
+          cubit.updateState((current) => current.copyWith(uiScale: value));
         },
       ),
     );

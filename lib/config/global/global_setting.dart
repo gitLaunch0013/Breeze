@@ -140,6 +140,7 @@ abstract class GlobalSettingState with _$GlobalSettingState {
     @Default(CacheSettingState()) CacheSettingState cacheSetting,
     @Default(ChineseConvertMode.off) ChineseConvertMode chineseConvertMode,
     @Default(BookshelfSettingState()) BookshelfSettingState bookshelfSetting,
+    @Default(1.0) double uiScale,
   }) = _GlobalSettingState;
 
   factory GlobalSettingState.fromJson(Map<String, dynamic> json) =>

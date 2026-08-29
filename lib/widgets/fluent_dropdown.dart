@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:zephyr/util/context/context_extensions.dart';
+import 'package:zephyr/widgets/ui_scale_zoom.dart';
 
 /// A single entry in a fluent popup menu.
 class FluentPopupMenuItem<T> {
@@ -150,7 +151,10 @@ class _FluentPopupMenuButtonState<T> extends State<FluentPopupMenuButton<T>>
 
     final renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
-    final position = renderBox.localToGlobal(Offset.zero);
+    // localToGlobal 返回真实全局坐标，需换算到虚拟坐标系
+    // （界面缩放时 MediaQuery.sizeOf 返回的是虚拟尺寸）。
+    final position =
+        renderBox.localToGlobal(Offset.zero) / UiScaleScope.of(context);
     final screenSize = MediaQuery.sizeOf(context);
     final safePadding = MediaQuery.paddingOf(context);
 
@@ -315,7 +319,10 @@ class _FluentDropdownState<T> extends State<FluentDropdown<T>>
 
     final renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
-    final position = renderBox.localToGlobal(Offset.zero);
+    // localToGlobal 返回真实全局坐标，需换算到虚拟坐标系
+    // （界面缩放时 MediaQuery.sizeOf 返回的是虚拟尺寸）。
+    final position =
+        renderBox.localToGlobal(Offset.zero) / UiScaleScope.of(context);
     final screenSize = MediaQuery.sizeOf(context);
     final safePadding = MediaQuery.paddingOf(context);
 
@@ -865,23 +872,30 @@ class _PositionedMenuOverlayState<T> extends State<_PositionedMenuOverlay<T>>
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
     final safePadding = MediaQuery.paddingOf(context);
+    // anchor 是真实全局坐标，需换算到虚拟坐标系
+    // （界面缩放时 MediaQuery.sizeOf 返回的是虚拟尺寸）。
+    final s = UiScaleScope.of(context);
+    final anchor = Rect.fromLTRB(
+      widget.anchor.left / s,
+      widget.anchor.top / s,
+      widget.anchor.right / s,
+      widget.anchor.bottom / s,
+    );
     final menuWidth = _calculatePopupMenuWidth(
       context,
-      widget.anchor.width,
+      anchor.width,
       widget.entries,
     );
 
     final fitsBelow =
-        widget.anchor.bottom + 8 + 200 < screenSize.height - safePadding.bottom;
+        anchor.bottom + 8 + 200 < screenSize.height - safePadding.bottom;
     final fitsRight =
-        widget.anchor.left + menuWidth <= screenSize.width - safePadding.right;
+        anchor.left + menuWidth <= screenSize.width - safePadding.right;
     final alignTop = !fitsBelow;
     final alignRight = !fitsRight;
 
-    final dx = alignRight
-        ? widget.anchor.right - menuWidth
-        : widget.anchor.left;
-    final dy = alignTop ? widget.anchor.top - 6 : widget.anchor.bottom + 6;
+    final dx = alignRight ? anchor.right - menuWidth : anchor.left;
+    final dy = alignTop ? anchor.top - 6 : anchor.bottom + 6;
 
     final alignment = alignTop
         ? (alignRight ? Alignment.bottomRight : Alignment.bottomLeft)

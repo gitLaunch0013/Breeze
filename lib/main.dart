@@ -48,6 +48,7 @@ import 'package:zephyr/util/manage_cache.dart';
 import 'package:zephyr/util/rust_loader.dart';
 import 'package:zephyr/widgets/desktop/custom_title_bar.dart';
 import 'package:zephyr/widgets/desktop/intent.dart';
+import 'package:zephyr/widgets/ui_scale_zoom.dart';
 
 export 'package:zephyr/network/http/wind_http.dart'
     show WindHttp, FetchResponse, fetch, fetchDirect;
@@ -762,6 +763,8 @@ class _MyAppState extends State<MyApp> with WindowListener, TrayListener {
                     child: content,
                   );
 
+                  final uiScale = globalSettingState.uiScale.clamp(1.0, 2.0);
+
                   if (Platform.isWindows ||
                       Platform.isLinux ||
                       Platform.isMacOS) {
@@ -771,13 +774,38 @@ class _MyAppState extends State<MyApp> with WindowListener, TrayListener {
                           .instance
                           .fullscreenNotifier,
                       builder: (context, isReaderFullscreen, _) {
+                        final mq = MediaQuery.of(context);
+                        final titleBarHeight = isReaderFullscreen
+                            ? 0.0
+                            : CustomTitleBar.height;
                         return Column(
                           children: [
                             if (!isReaderFullscreen) const CustomTitleBar(),
-                            Expanded(child: desktopContent),
+                            if (uiScale > 1.0)
+                              UiScaleZoom(
+                                scale: uiScale,
+                                virtualSize: Size(
+                                  mq.size.width / uiScale,
+                                  (mq.size.height - titleBarHeight) /
+                                      uiScale,
+                                ),
+                                child: desktopContent,
+                              )
+                            else
+                              Expanded(child: desktopContent),
                           ],
                         );
                       },
+                    );
+                  } else if (uiScale > 1.0) {
+                    final mq = MediaQuery.of(context);
+                    content = UiScaleZoom(
+                      scale: uiScale,
+                      virtualSize: Size(
+                        mq.size.width / uiScale,
+                        mq.size.height / uiScale,
+                      ),
+                      child: content,
                     );
                   }
                   // 第三方依赖仍有 legacy Material widget，需要这个桥接层提供旧主题

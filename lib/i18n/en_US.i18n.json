@@ -104,6 +104,8 @@
     "appearance": "Appearance",
     "theme": "Theme mode",
     "themeSubtitle": "Choose strategy to switch light/dark theme",
+    "uiScale": "UI scale",
+    "uiScaleSubtitle": "Scale up the entire interface for high-resolution screens",
     "themeColor": "Theme color",
     "themeColorSubtitle": "Choose primary color for the app",
     "language": "Language",

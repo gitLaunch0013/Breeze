@@ -104,6 +104,8 @@
     "appearance": "外观与显示",
     "theme": "主题模式",
     "themeSubtitle": "选择策略，切换明暗主题",
+    "uiScale": "界面缩放",
+    "uiScaleSubtitle": "缩放整个界面，适配高分辨率屏幕",
     "themeColor": "主题颜色",
     "themeColorSubtitle": "选择主色，统一应用视觉",
     "language": "语言",
