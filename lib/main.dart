@@ -783,14 +783,19 @@ class _MyAppState extends State<MyApp> with WindowListener, TrayListener {
                           children: [
                             if (!isReaderFullscreen) const CustomTitleBar(),
                             if (uiScale > 1.0)
-                              UiScaleZoom(
-                                scale: uiScale,
-                                virtualSize: ui.Size(
-                                  mq.size.width / uiScale,
-                                  (mq.size.height - titleBarHeight) /
-                                      uiScale,
+                              // 必须用 Flexible：Column 对非 flex 子级在主轴上
+                              // 给 0..Infinity 约束，OverflowBox 会撑到 Infinity 导致
+                              // 布局断言失败（125% 白屏根因）。
+                              Flexible(
+                                child: UiScaleZoom(
+                                  scale: uiScale,
+                                  virtualSize: ui.Size(
+                                    mq.size.width / uiScale,
+                                    (mq.size.height - titleBarHeight) /
+                                        uiScale,
+                                  ),
+                                  child: desktopContent,
                                 ),
-                                child: desktopContent,
                               )
                             else
                               Expanded(child: desktopContent),
