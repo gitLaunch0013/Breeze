@@ -87,6 +87,7 @@ _GlobalSettingState _$GlobalSettingStateFromJson(
       : BookshelfSettingState.fromJson(
           json['bookshelfSetting'] as Map<String, dynamic>,
         ),
+  uiScale: (json['uiScale'] as num?)?.toDouble() ?? 1.0,
 );
 
 Map<String, dynamic> _$GlobalSettingStateToJson(_GlobalSettingState instance) =>
@@ -131,6 +132,7 @@ Map<String, dynamic> _$GlobalSettingStateToJson(_GlobalSettingState instance) =>
       'chineseConvertMode':
           _$ChineseConvertModeEnumMap[instance.chineseConvertMode]!,
       'bookshelfSetting': instance.bookshelfSetting.toJson(),
+      'uiScale': instance.uiScale,
     };
 
 const _$ThemeModeEnumMap = {

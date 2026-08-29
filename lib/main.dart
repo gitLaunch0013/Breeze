@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:desktop_webview_linux/desktop_webview_linux.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -784,7 +785,7 @@ class _MyAppState extends State<MyApp> with WindowListener, TrayListener {
                             if (uiScale > 1.0)
                               UiScaleZoom(
                                 scale: uiScale,
-                                virtualSize: Size(
+                                virtualSize: ui.Size(
                                   mq.size.width / uiScale,
                                   (mq.size.height - titleBarHeight) /
                                       uiScale,
@@ -801,7 +802,7 @@ class _MyAppState extends State<MyApp> with WindowListener, TrayListener {
                     final mq = MediaQuery.of(context);
                     content = UiScaleZoom(
                       scale: uiScale,
-                      virtualSize: Size(
+                      virtualSize: ui.Size(
                         mq.size.width / uiScale,
                         mq.size.height / uiScale,
                       ),

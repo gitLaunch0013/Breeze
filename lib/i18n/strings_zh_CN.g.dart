@@ -403,6 +403,12 @@ class Translations$settings$zh_CN {
 	/// zh-CN: '选择策略，切换明暗主题'
 	String get themeSubtitle => '选择策略，切换明暗主题';
 
+	/// zh-CN: '界面缩放'
+	String get uiScale => '界面缩放';
+
+	/// zh-CN: '缩放整个界面，适配高分辨率屏幕'
+	String get uiScaleSubtitle => '缩放整个界面，适配高分辨率屏幕';
+
 	/// zh-CN: '主题颜色'
 	String get themeColor => '主题颜色';
 
@@ -3869,6 +3875,8 @@ extension on Translations {
 			'settings.appearance' => '外观与显示',
 			'settings.theme' => '主题模式',
 			'settings.themeSubtitle' => '选择策略，切换明暗主题',
+			'settings.uiScale' => '界面缩放',
+			'settings.uiScaleSubtitle' => '缩放整个界面，适配高分辨率屏幕',
 			'settings.themeColor' => '主题颜色',
 			'settings.themeColorSubtitle' => '选择主色，统一应用视觉',
 			'settings.language' => '语言',
@@ -4282,10 +4290,10 @@ extension on Translations {
 			'reader.webtoonScrollInterval' => '条漫滚动间隔',
 			'reader.singlePageScrollInterval' => '单页式滚动间隔',
 			'reader.preload' => '预加载',
-			'reader.preloadImageCount' => '预加载图片数量',
-			'reader.preloadImageCountSubtitle' => '提前下载当前阅读位置之后的图片',
 			_ => null,
 		} ?? switch (path) {
+			'reader.preloadImageCount' => '预加载图片数量',
+			'reader.preloadImageCountSubtitle' => '提前下载当前阅读位置之后的图片',
 			'reader.preloadChapterCount' => '预加载章节数量',
 			'reader.preloadChapterCountSubtitle' => '提前加载后续章节信息',
 			'reader.background' => '阅读背景',
@@ -4796,10 +4804,10 @@ extension on Translations {
 			'comicFollow.fetchFailed' => '获取失败',
 			'comicFollow.newChaptersShort' => ({required Object diff}) => '新增 ${diff} 话',
 			'comicFollow.update' => '更新',
-			'comicFollow.retry' => '重试',
-			'comicFollow.updateChannelName' => '漫画更新提醒',
 			_ => null,
 		} ?? switch (path) {
+			'comicFollow.retry' => '重试',
+			'comicFollow.updateChannelName' => '漫画更新提醒',
 			'comicFollow.updateChannelDesc' => '追更漫画检测到新章节时推送',
 			'comicFollow.updateTitle' => '追更更新',
 			'comicFollow.updateBodySingle' => '有 1 部追更漫画更新了',

@@ -106,7 +106,8 @@ class AppearanceSettingPage extends StatelessWidget {
   }
 
   Widget _uiScale(GlobalSettingState state, GlobalSettingCubit cubit) {
-    const scaleItems = <double, String>{
+    // double 重写了 ==/hashCode，不能作为 const map 的 key
+    final scaleItems = <double, String>{
       1.0: '100%',
       1.25: '125%',
       1.5: '150%',

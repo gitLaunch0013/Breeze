@@ -206,6 +206,8 @@ class _Translations$settings$en_US extends Translations$settings$zh_CN {
 	@override String get appearance => 'Appearance';
 	@override String get theme => 'Theme mode';
 	@override String get themeSubtitle => 'Choose strategy to switch light/dark theme';
+	@override String get uiScale => 'UI scale';
+	@override String get uiScaleSubtitle => 'Scale up the entire interface for high-resolution screens';
 	@override String get themeColor => 'Theme color';
 	@override String get themeColorSubtitle => 'Choose primary color for the app';
 	@override String get language => 'Language';
@@ -1612,6 +1614,8 @@ extension on TranslationsEnUs {
 			'settings.appearance' => 'Appearance',
 			'settings.theme' => 'Theme mode',
 			'settings.themeSubtitle' => 'Choose strategy to switch light/dark theme',
+			'settings.uiScale' => 'UI scale',
+			'settings.uiScaleSubtitle' => 'Scale up the entire interface for high-resolution screens',
 			'settings.themeColor' => 'Theme color',
 			'settings.themeColorSubtitle' => 'Choose primary color for the app',
 			'settings.language' => 'Language',
@@ -2025,10 +2029,10 @@ extension on TranslationsEnUs {
 			'reader.singlePageScrollInterval' => 'Single page scroll interval',
 			'reader.preload' => 'Preload',
 			'reader.preloadImageCount' => 'Preloaded image count',
-			'reader.preloadImageCountSubtitle' => 'Download images after the current reading position in advance',
-			'reader.preloadChapterCount' => 'Preloaded chapter count',
 			_ => null,
 		} ?? switch (path) {
+			'reader.preloadImageCountSubtitle' => 'Download images after the current reading position in advance',
+			'reader.preloadChapterCount' => 'Preloaded chapter count',
 			'reader.preloadChapterCountSubtitle' => 'Load following chapter information in advance',
 			'reader.background' => 'Background',
 			'reader.auto' => 'Auto',
@@ -2539,10 +2543,10 @@ extension on TranslationsEnUs {
 			'comicFollow.newChaptersShort' => ({required Object diff}) => '${diff} new',
 			'comicFollow.update' => 'Update',
 			'comicFollow.retry' => 'Retry',
-			'comicFollow.updateChannelName' => 'Comic update reminder',
-			'comicFollow.updateChannelDesc' => 'Pushed when followed comics have new chapters',
 			_ => null,
 		} ?? switch (path) {
+			'comicFollow.updateChannelName' => 'Comic update reminder',
+			'comicFollow.updateChannelDesc' => 'Pushed when followed comics have new chapters',
 			'comicFollow.updateTitle' => 'Follow update',
 			'comicFollow.updateBodySingle' => '1 followed comic has updates',
 			'comicFollow.updateBodyMultiple' => ({required Object count}) => '${count} followed comics have updates',
